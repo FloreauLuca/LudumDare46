@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Rigidbody2D rigidbody;
+    [SerializeField] private float speed = 5.0f;
+    [SerializeField] private float jumpForce = 1.0f;
+    private bool grounded = true;
+    private Vector2 startPosition;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody2D>();
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Vector2 direction = new Vector2(Input.GetAxis("Horizontal") * speed, rigidbody.velocity.y);
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            direction = new Vector2(direction.x, jumpForce);
+            grounded = false;
+        }
+        rigidbody.velocity = direction;
+
+        if (transform.position.y < -5)
+        {
+            transform.position = startPosition;
+        }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        grounded = true;
+    }
+
 }

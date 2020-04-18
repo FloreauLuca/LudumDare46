@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3549178643
+    locked: 0
+  - name: Raft
+    uniqueID: 1673759619
+    locked: 0
+  - name: Foreground
+    uniqueID: 1462228065
+    locked: 0
