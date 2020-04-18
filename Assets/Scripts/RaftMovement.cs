@@ -24,7 +24,7 @@ public class RaftMovement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        sinusIndex = waves.SinusIndex + Mathf.Abs(transform.position.x - waves.transform.position.x) / waves.Speed;
+        sinusIndex = waves.SinusIndex - Mathf.Abs(transform.position.x - waves.transform.position.x) / waves.Speed;
         startPosition = transform.position;
     }
 
@@ -57,6 +57,5 @@ public class RaftMovement : MonoBehaviour
         sinusIndex += Time.deltaTime;
         rigidbody.angularVelocity += Mathf.Cos(sinusIndex*waves.WaveWidth)*waves.WaveHeight*waveForceAngular;
         transform.position = new Vector3(transform.position.x, (Mathf.Sin(sinusIndex * waves.WaveWidth) * waves.WaveHeight * waveForceLinear) + startPosition.y);
-        Debug.Log(Mathf.Sin(sinusIndex * waves.WaveWidth) * waves.WaveHeight);
     }
 }

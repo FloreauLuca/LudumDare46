@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
             rigidbody.velocity = direction;
         }
-        if (transform.position.y < -5)
+        if (transform.position.y < -10.0f)
         {
             transform.position = startPosition;
         }
