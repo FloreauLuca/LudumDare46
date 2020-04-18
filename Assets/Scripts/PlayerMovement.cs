@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
     [SerializeField] private float speed = 5.0f;
+    [SerializeField] private float downSpeed = 1.0f;
     [SerializeField] private float jumpForce = 1.0f;
     private bool grounded = true;
     private Vector2 startPosition;
@@ -20,14 +21,21 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 direction = new Vector2(Input.GetAxis("Horizontal") * speed, rigidbody.velocity.y);
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (!Input.GetButton("Drive"))
         {
-            direction = new Vector2(direction.x, jumpForce);
-            grounded = false;
-        }
-        rigidbody.velocity = direction;
+            Vector2 direction = new Vector2(Input.GetAxis("Horizontal") * speed, rigidbody.velocity.y);
+            if (Input.GetButtonDown("Jump") && grounded)
+            {
+                direction = new Vector2(direction.x, jumpForce);
+                grounded = false;
+            }
+            if (Input.GetAxis("Vertical") < 0 && !grounded)
+            {
+                direction += Vector2.down * downSpeed;
+            }
 
+            rigidbody.velocity = direction;
+        }
         if (transform.position.y < -5)
         {
             transform.position = startPosition;
@@ -37,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         grounded = true;
+    }  
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        grounded = false;
     }
 
 }
