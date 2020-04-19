@@ -34,7 +34,7 @@ public class Waves : MonoBehaviour
     {
         currentTimer += Time.deltaTime;
         sinusIndex += Time.deltaTime * speed;
-        if (Mathf.Abs(lastPosition.position.x - transform.position.x) >= lastPosition.localScale.x)
+        if ( transform.position.x - lastPosition.position.x >= lastPosition.localScale.x/2)
         {
             currentTimer = 0;
             Vector3 newPosition = new Vector3(lastPosition.position.x+ lastPosition.localScale.x, transform.position.y + Mathf.Sin(sinusIndex * waveWidth) * waveHeight, transform.position.z);
@@ -50,7 +50,6 @@ public class Waves : MonoBehaviour
             mesh.vertices = vertices;
             mesh.triangles = triangles;
             mesh.uv = uvs;
-            Debug.Log(mesh.vertices[2]);
             lastPosition = gameObject.transform;
         }
     }

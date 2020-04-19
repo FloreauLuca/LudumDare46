@@ -72,10 +72,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4385405794767102999, guid: f91668d76408eda4793bd985762482ed,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4385405794767102998, guid: f91668d76408eda4793bd985762482ed, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f91668d76408eda4793bd985762482ed, type: 3}
