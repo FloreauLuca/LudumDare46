@@ -51,11 +51,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         started = true;
-        uiManager.Invoke("DisplayGamePanel", 0.2f);
+        uiManager.Invoke(nameof(uiManager.DisplayGamePanel), 0.2f);
     }
 
 
     public void RestartGame()
+    {
+        Invoke(nameof(LoadScene), 0.2f);
+    }
+    
+    private void LoadScene()
     {
         SceneManager.LoadScene("SampleScene");
     }

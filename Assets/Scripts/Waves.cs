@@ -33,7 +33,7 @@ public class Waves : MonoBehaviour
     void Update()
     {
         currentTimer += Time.deltaTime;
-        sinusIndex += Time.deltaTime;
+        sinusIndex += Time.deltaTime * speed;
         if (Mathf.Abs(lastPosition.position.x - transform.position.x) >= lastPosition.localScale.x)
         {
             currentTimer = 0;

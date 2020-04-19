@@ -43,7 +43,7 @@ public class RaftMovement : MonoBehaviour
         {
             Debug.Log("<color=red> Loose </color>");
             gameManager.EndGame(false);
-            animator.SetTrigger("CapSize");
+            animator.SetTrigger("Capsize");
 
         }
         rigidbody.angularVelocity -= rotation * archimedForce;
@@ -56,7 +56,7 @@ public class RaftMovement : MonoBehaviour
             player.transform.rotation = transform.rotation;
         }
 
-        sinusIndex = waves.SinusIndex - Mathf.Abs(transform.position.x - waves.transform.position.x) / waves.Speed;
+        sinusIndex = waves.SinusIndex - Mathf.Abs(transform.position.x - waves.transform.position.x);
 
         //Wave Movement
         sinusIndex += Time.deltaTime;
