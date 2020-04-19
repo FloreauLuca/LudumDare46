@@ -28,8 +28,6 @@ public class Waves : MonoBehaviour
     {
         currentTimer += Time.deltaTime;
         sinusIndex += Time.deltaTime;
-        Debug.Log(Mathf.Abs(lastPosition.position.x - transform.position.x));
-        Debug.Log(lastPosition.localScale.x / 2);
         if (Mathf.Abs(lastPosition.position.x - transform.position.x) >= lastPosition.localScale.x)
         {
             currentTimer = 0;
@@ -38,12 +36,11 @@ public class Waves : MonoBehaviour
             Destroy(gameObject, 5.0f);
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
             Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
-            Debug.Log(mesh.vertices[2]);
             Vector3[] vertices = mesh.vertices;
             int[] triangles = mesh.triangles;
             Vector2[] uvs = mesh.uv;
             mesh.Clear();
-            vertices[2] = (lastPosition.position.y - newPosition.y)/10 * Vector3.up + new Vector3(-0.5f, 0.5f);
+            vertices[2] = (lastPosition.position.y - newPosition.y)/ lastPosition.localScale.y * Vector3.up + new Vector3(-0.5f, 0.5f);
             mesh.vertices = vertices;
             mesh.triangles = triangles;
             mesh.uv = uvs;

@@ -22,12 +22,15 @@ public class BoxSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTimer += Time.deltaTime;
-        if (currentTimer > currentSpawnRate)
+        if (gameManager.Started)
         {
-            currentTimer = 0;
-            Instantiate(boxPrefabs[Random.Range(0, boxPrefabs.Count)],  new Vector3(Random.Range(leftLimit, rightLimit) + transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-            gameManager.Score += 1;
+            currentTimer += Time.deltaTime;
+            if (currentTimer > currentSpawnRate)
+            {
+                currentTimer = 0;
+                Instantiate(boxPrefabs[Random.Range(0, boxPrefabs.Count)], new Vector3(Random.Range(leftLimit, rightLimit) + transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                gameManager.Score += 1;
+            }
         }
     }
 }

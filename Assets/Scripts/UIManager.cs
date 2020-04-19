@@ -8,10 +8,13 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
 
-    [SerializeField] private Slider slider;
 
     [SerializeField] private GameObject startPanel;
+
     [SerializeField] private GameObject gamePanel;
+    [SerializeField] private TextMeshProUGUI speedText;
+    [SerializeField] private Slider slider;
+
     [SerializeField] private GameObject endPanel;
     [SerializeField] private TextMeshProUGUI endTitleText;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -26,6 +29,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         slider.value = gameManager.CurrentDist;
+        speedText.text = "Speed : "  + gameManager.Score.ToString();
     }
 
     public void DisplayEndPanel(bool win, float score)
@@ -38,11 +42,12 @@ public class UIManager : MonoBehaviour
         if (win)
         {
             endTitleText.text = "Congratulation";
+            scoreText.text = "You finish in " + score.ToString() + " s";
         } else
         {
             endTitleText.text = "Loose";
+            scoreText.text = "You survive " + score.ToString() + " s";
         }
-        scoreText.text = "Score : " + score.ToString();
     }
 
     public void DisplayStartPanel()

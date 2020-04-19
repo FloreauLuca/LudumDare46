@@ -17,13 +17,16 @@ public class RaftMovement : MonoBehaviour
     [SerializeField] private float waveForceLinear = 1.0f;
     [SerializeField] private Waves waves;
     private Vector3 startPosition;
+    [SerializeField] private Transform wheelTransform;
 
+    private Animator animator;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         sinusIndex = waves.SinusIndex - Mathf.Abs(transform.position.x - waves.transform.position.x) / waves.Speed;
         startPosition = transform.position;
     }
@@ -40,6 +43,8 @@ public class RaftMovement : MonoBehaviour
         {
             Debug.Log("<color=red> Loose </color>");
             gameManager.EndGame(false);
+            animator.SetTrigger("CapSize");
+
         }
         rigidbody.angularVelocity -= rotation * archimedForce;
 
@@ -47,7 +52,7 @@ public class RaftMovement : MonoBehaviour
         {
             Vector3 direction = new Vector2(Input.GetAxis("Horizontal") * lateralSpeed, 0);
             transform.position += direction * (lateralSpeed * Time.deltaTime);
-            player.transform.position = transform.position + Vector3.up;
+            player.transform.position = wheelTransform.position;
             player.transform.rotation = transform.rotation;
         }
 

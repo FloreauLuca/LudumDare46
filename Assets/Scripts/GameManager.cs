@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float maxDist;
     public float MaxDist => maxDist;
 
+    public bool started = false;
+    public bool Started => started;
+
     private float currentDist;
     public float CurrentDist {
         get => currentDist;
@@ -40,13 +43,15 @@ public class GameManager : MonoBehaviour
     public void EndGame(bool win)
     {
         Time.timeScale = 0.0f;
+        started = false;
         uiManager.DisplayEndPanel(win, Time.timeSinceLevelLoad);
     }
 
     public void StartGame()
     {
         Time.timeScale = 1.0f;
-        uiManager.DisplayGamePanel();
+        started = true;
+        uiManager.Invoke("DisplayGamePanel", 0.2f);
     }
 
 
