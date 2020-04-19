@@ -6,11 +6,17 @@ using UnityEngine;
 public class Waves : MonoBehaviour
 {
     [SerializeField] private float waveHeight = 1.0f;
-    public float WaveHeight => waveHeight;
+    public float WaveHeight {
+        get => waveHeight;
+        set => waveHeight = value;
+    }
     [SerializeField] private float waveWidth = 1.0f;
     public float WaveWidth => waveWidth;
     [SerializeField] private float speed = 1.0f;
-    public float Speed => speed;
+    public float Speed {
+        get => speed;
+        set => speed = value;
+    }
     [SerializeField] private GameObject wavesPrefab;
     private float currentTimer;
     private float sinusIndex;
