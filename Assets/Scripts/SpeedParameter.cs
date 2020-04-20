@@ -39,6 +39,10 @@ public class SpeedParameter : MonoBehaviour
     void Update()
     {
         float score = gameManager.Score;
+        if (!gameManager.Started)
+        {
+            score = 0;
+        }
 
         ParticleSystem.VelocityOverLifetimeModule velocity = rainParticle.velocityOverLifetime;
         velocity.xMultiplier = rainSpeedMultiplier * score;

@@ -6,6 +6,9 @@ public class RaftMovement : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
 
+    [SerializeField] private float maxPositionX = 5.0f;
+
+
     private Rigidbody2D rigidbody;
     [SerializeField] private float archimedForce = 0.5f;
     [SerializeField] private float maxOrientation = 45.0f;
@@ -42,7 +45,10 @@ public class RaftMovement : MonoBehaviour
         if (Mathf.Abs(rotation) > maxOrientation)
         {
             Debug.Log("<color=red> Loose </color>");
-            gameManager.EndGame(false);
+            if (gameManager.Started)
+            {
+                gameManager.EndGame(false);
+            }
             animator.SetTrigger("Capsize");
 
         }
@@ -52,6 +58,13 @@ public class RaftMovement : MonoBehaviour
         {
             Vector3 direction = new Vector2(Input.GetAxis("Horizontal") * lateralSpeed, 0);
             transform.position += direction * (lateralSpeed * Time.deltaTime);
+            if (transform.position.x > maxPositionX)
+            {
+                transform.position = new Vector3(maxPositionX, transform.position.y);
+            } else if (transform.position.x < -maxPositionX)
+            {
+                transform.position = new Vector3(-maxPositionX, transform.position.y);
+            }
             player.transform.position = wheelTransform.position;
             player.transform.rotation = transform.rotation;
         }

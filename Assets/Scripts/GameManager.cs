@@ -31,18 +31,21 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
-        currentDist += score * Time.deltaTime;
-        if (currentDist >= maxDist)
+        if (started)
         {
-            currentDist = maxDist;
-            Debug.Log("<color=lime> Win </color>");
-            EndGame(true);
+            currentDist += score * Time.deltaTime;
+            if (currentDist >= maxDist)
+            {
+                currentDist = maxDist;
+                Debug.Log("<color=lime> Win </color>");
+                EndGame(true);
+            }
         }
     }
 
     public void EndGame(bool win)
     {
-        Time.timeScale = 0.0f;
+        //Time.timeScale = 0.0f;
         started = false;
         uiManager.DisplayEndPanel(win, Time.timeSinceLevelLoad);
     }

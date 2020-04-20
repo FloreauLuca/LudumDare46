@@ -72,14 +72,14 @@ public class PlayerMovement : MonoBehaviour
                 GameObject box = ray.collider.gameObject;
                 if (box.CompareTag("Box"))
                 {
-                    box.transform.position = transform.position + castOrigin;
+                    box.transform.position = transform.position + castOrigin*2;
                     boxContain = box;
                 }
             }
         }
         if (Input.GetButton("Take") && boxContain != null)
         {
-            boxContain.transform.position = transform.position + castOrigin;
+            boxContain.transform.position = transform.position + castOrigin*2;
         }
         if (Input.GetButtonUp("Take"))
         {
